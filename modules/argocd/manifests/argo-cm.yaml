@@ -1,0 +1,8 @@
+server:
+  config:
+    oidc.config: |
+      name: SSO Auth
+      issuer: https://auth.jfal.jus.br/realms/intranet
+      clientID: argocd-ext
+      clientSecret: $oidc.keycloak.clientSecret
+      requestScopes: ["openid", "profile", "email", "groups"]

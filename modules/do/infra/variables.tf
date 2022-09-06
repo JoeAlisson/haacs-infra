@@ -1,33 +1,43 @@
 variable "do_token" {
-  type = string
+  type      = string
   sensitive = true
 }
 
 variable "k8s_name" {
-  type = string
+  type    = string
   default = "haacs-k8s"
 }
+
 variable "k8s_region" {
-  type = string
+  type    = string
   default = "nyc1"
 }
+
 variable "k8s_node_size" {
-  type = string
+  type    = string
   default = "s-2vcpu-2gb"
 }
+
 variable "k8s_node_count" {
-  type = number
+  type    = number
   default = "3"
 }
+
 variable "k8s_node_auto_scale" {
-  type = bool
+  type    = bool
   default = "true"
 }
+
 variable "k8s_min_nodes" {
-  type = number
+  type    = number
   default = "2"
 }
+
 variable "k8s_max_nodes" {
-  type = number
+  type    = number
   default = "5"
+}
+
+variable "k8s_ingress_domain" {
+  type = string
 }

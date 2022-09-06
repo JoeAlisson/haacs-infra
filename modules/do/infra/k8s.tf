@@ -7,7 +7,7 @@ resource "digitalocean_kubernetes_cluster" "k8s_haacs" {
   tags = ["haacs"]
 
   node_pool {
-    name = "default"
+    name = "${var.k8s_name}-default-pool"
     size = var.k8s_node_size
     node_count = var.k8s_node_count
     auto_scale = var.k8s_node_auto_scale
@@ -18,6 +18,6 @@ resource "digitalocean_kubernetes_cluster" "k8s_haacs" {
 }
 
 resource "local_file" "kubeconfig" {
-  filename = "/opt/kube/config"
+  filename = "./kube/config"
   content = digitalocean_kubernetes_cluster.k8s_haacs.kube_config.0.raw_config
 }

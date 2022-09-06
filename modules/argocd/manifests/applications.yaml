@@ -1,0 +1,26 @@
+applications:
+  - name: apps
+    namespace: argocd
+    project: apps
+    source:
+      repoURL: https://github.com/JoeAlisson/haacs-apps.git
+      targetRevision: main
+      path: apps
+    destination:
+      server: https://kubernetes.default.svc
+      namespace: argocd
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+
+projects:
+  - name: apps
+    destinations:
+      - namespace: '*'
+        server: 'https://kubernetes.default.svc'
+    sourceRepos:
+      - '*'
+    clusterResourceWhitelist:
+      - group: '*'
+        kind: '*'
