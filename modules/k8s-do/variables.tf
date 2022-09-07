@@ -12,3 +12,7 @@ variable "argocd_oauth_key" {
 variable "k8s_ingress_domain" {
   type = string
 }
+
+variable "letsencrypt_email" {
+  type = string
+}
