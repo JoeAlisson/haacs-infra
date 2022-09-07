@@ -28,11 +28,6 @@ resource "helm_release" "argocd" {
   }
 
   set {
-    name = "server.certificate.additionalHosts[0]"
-    value = "grpc.argocd.${var.ingress_domain}"
-  }
-
-  set {
     name  = "server.ingress.hosts[0]"
     value = "argocd.${var.ingress_domain}"
   }
