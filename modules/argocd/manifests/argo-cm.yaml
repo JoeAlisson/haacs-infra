@@ -1,3 +1,6 @@
+crds:
+  keep: false
+
 server:
   config:
     oidc.config: |
