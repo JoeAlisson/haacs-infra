@@ -7,13 +7,3 @@ terraform {
     }
   }
 }
-
-provider "helm" {
-  kubernetes {
-    host  = var.cluster_host
-    token = var.cluster_token
-    cluster_ca_certificate = base64decode(
-      var.cluster_ca_certificate_b64
-    )
-  }
-}

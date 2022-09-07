@@ -6,3 +6,29 @@ server:
       clientID: argocd-ext
       clientSecret: $oidc.keycloak.clientSecret
       requestScopes: ["openid", "profile", "email", "groups"]
+
+  rbacConfig:
+    policy.csv: |
+      g, /NTI/SS, role:admin
+
+  certificate:
+    enabled: true
+    issuer:
+      group: "cert-manager.io"
+      kind: "ClusterIssuer"
+      name: "letsencrypt"
+
+  ingress:
+    enabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    ingressClassName: "nginx"
+    tls:
+      - secretName: argocd-server-tls
+        hosts:
+          - argocd.jfal.jus.br
+
+  extraArgs:
+    - --insecure
+

@@ -15,6 +15,12 @@ resource "digitalocean_kubernetes_cluster" "k8s_haacs" {
     max_nodes = var.k8s_max_nodes
     tags = ["haacs"]
   }
+
+  lifecycle {
+    ignore_changes = [
+      node_pool.0.node_count,
+    ]
+  }
 }
 
 resource "local_file" "kubeconfig" {

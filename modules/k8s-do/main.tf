@@ -39,9 +39,6 @@ provider "helm" {
 
 module "cert_manager" {
   source = "../cert-manager"
-  cluster_token =  module.k8s_infra.cluster_token
-  cluster_host =  module.k8s_infra.cluster_endpoint
-  cluster_ca_certificate_b64 = module.k8s_infra.cluster_certificate
   letsencrypt_email = var.letsencrypt_email
 
   depends_on = [module.ingress_nginx]
@@ -53,9 +50,12 @@ module "cert_manager" {
 
 module "argocd" {
   source = "../argocd"
-  cluster_token =  module.k8s_infra.cluster_token
-  cluster_host =  module.k8s_infra.cluster_endpoint
-  cluster_ca_certificate_b64 =  module.k8s_infra.cluster_certificate
   argocd_oauth_key =  var.argocd_oauth_key
   ingress_domain = var.k8s_ingress_domain
+
+  depends_on = [module.cert_manager]
+
+  providers = {
+    helm = helm
+  }
 }

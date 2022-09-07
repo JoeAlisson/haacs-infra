@@ -12,6 +12,7 @@ resource "digitalocean_loadbalancer" "k8s-ingress" {
   lifecycle {
     ignore_changes = [
       forwarding_rule,
+      name,
     ]
 
 
