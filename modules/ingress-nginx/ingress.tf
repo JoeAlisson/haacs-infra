@@ -14,7 +14,17 @@ resource "helm_release" "ingress_nginx" {
   }
 
   set {
-    name = "controller.service.annotations.${var.provider_loadbalancer_id_annotation}"
-    value = var.loadbalancer_id
+    name  = "controller.service.externalTrafficPolicy"
+    value = "Local"
+  }
+
+  set {
+    name = "controller.service.annotations.${var.provider_loadbalancer_annotation}"
+    value = var.provider_loadbalancer_annotation_value
+  }
+
+  set {
+    name = "controller.service.loadBalancerIP"
+    value = var.loadBalancer_ip
   }
 }

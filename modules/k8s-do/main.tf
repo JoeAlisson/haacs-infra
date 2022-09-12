@@ -23,7 +23,8 @@ module "ingress_nginx" {
   cluster_token =  module.k8s_infra.cluster_token
   cluster_host =  module.k8s_infra.cluster_endpoint
   cluster_ca_certificate_b64 = module.k8s_infra.cluster_certificate
-  loadbalancer_id =  module.k8s_infra.load_balancer_id
+  provider_loadbalancer_annotation = "kubernetes\\.digitalocean\\.com/load-balancer-id"
+  provider_loadbalancer_annotation_value =  module.k8s_infra.load_balancer_id
 }
 
 provider "helm" {
