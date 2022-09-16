@@ -2,7 +2,7 @@ variable "az_client_id" {
   type = string
 }
 variable "az_client_secret" {
-  type = string
+  type      = string
   sensitive = true
 }
 variable "az_tenant_id" {
@@ -16,9 +16,14 @@ variable "letsencrypt_email" {
 }
 
 variable "argocd_oauth_key" {
-  type =  string
+  type      = string
   sensitive = true
 }
 variable "k8s_ingress_domain" {
-  type =  string
+  type = string
+}
+
+variable "digitalocean_token" {
+  type      = string
+  sensitive = true
 }

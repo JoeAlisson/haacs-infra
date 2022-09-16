@@ -21,7 +21,3 @@ output "loadbalancer_ip" {
 output "loadbalancer_resource_group" {
   value = azurerm_public_ip.ingress_ip.resource_group_name
 }
-
-output "cluster_domain_root" {
-  value = azurerm_dns_cname_record.haacs_dns_asterisk.fqdn
-}

@@ -18,6 +18,14 @@ module "k8s_infra" {
   k8s_ingress_domain = var.k8s_ingress_domain
 }
 
+module "dns" {
+  source = "../dns"
+  digitalocean_token = var.do_token
+  dns_domain = var.k8s_ingress_domain
+  dns_ip = module.k8s_infra.load_balancer_ip
+
+}
+
 module "ingress_nginx" {
   source = "../ingress-nginx"
   cluster_token =  module.k8s_infra.cluster_token
@@ -26,6 +34,7 @@ module "ingress_nginx" {
   provider_loadbalancer_annotation = "kubernetes\\.digitalocean\\.com/load-balancer-id"
   provider_loadbalancer_annotation_value =  module.k8s_infra.load_balancer_id
 }
+
 
 provider "helm" {
   kubernetes {

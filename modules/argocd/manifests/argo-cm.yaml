@@ -30,7 +30,7 @@ server:
     tls:
       - secretName: argocd-server-tls
         hosts:
-          - argocd.jfal.jus.br
+          - argocd.ha.joealisson.dev
 
   extraArgs:
     - --insecure

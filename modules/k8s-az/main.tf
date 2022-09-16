@@ -34,6 +34,14 @@ module "ingress_nginx" {
   provider_loadbalancer_annotation_value = module.k8s_infra.loadbalancer_resource_group
 }
 
+module "dns" {
+  source = "../dns"
+  digitalocean_token = var.digitalocean_token
+  dns_domain = var.k8s_ingress_domain
+  dns_ip = module.k8s_infra.loadbalancer_ip
+
+}
+
 provider "helm" {
   kubernetes {
     host = module.k8s_infra.cluster_endpoint
