@@ -1,22 +1,22 @@
 resource "helm_release" "cert_manager" {
   repository = "https://charts.jetstack.io"
-  chart = "cert-manager"
-  version = "1.9.1"
+  chart      = "cert-manager"
+  version    = "1.9.1"
 
-  name  = "cert-manager"
+  name      = "cert-manager"
   namespace = "kube-system"
-  wait = true
+  wait      = true
 
   set {
-    name = "installCRDs"
+    name  = "installCRDs"
     value = "true"
   }
 }
 
 resource "helm_release" "cluster-issuer" {
-  name      = "cluster-issuer"
-  chart     = "${path.module}/letsencrypt-issuer"
-  namespace = "kube-system"
+  name       = "cluster-issuer"
+  chart      = "${path.module}/letsencrypt-issuer"
+  namespace  = "kube-system"
   depends_on = [
     helm_release.cert_manager,
   ]

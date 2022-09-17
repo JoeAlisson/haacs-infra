@@ -19,7 +19,7 @@ resource "helm_release" "argocd" {
 
   set_sensitive {
     name  = "configs.secret.extra.oidc\\.keycloak\\.clientSecret"
-    value = var.argocd_oauth_key
+    value = var.oidc_key
   }
 
   set {

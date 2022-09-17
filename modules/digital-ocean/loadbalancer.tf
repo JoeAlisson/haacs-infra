@@ -1,6 +1,6 @@
 resource "digitalocean_loadbalancer" "k8s-ingress" {
-  name   = "${var.k8s_name}-ingress"
-  region = var.k8s_region
+  name   = "${var.cluster_name}-ingress"
+  region = var.region
 
   forwarding_rule {
     entry_port      = 80
@@ -14,8 +14,5 @@ resource "digitalocean_loadbalancer" "k8s-ingress" {
       forwarding_rule,
       name,
     ]
-
-
   }
-
 }
