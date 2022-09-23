@@ -2,6 +2,7 @@ stages:
   - provisioning
 
 creating-infraestructure-do:
+  image: hashicorp/terraform:1.3.0
   stage: provisioning
   script:
     - terraform -chdir ./modules/k8s-digital-ocean init -backend-config="conn_str=${TF_PG_CONN}" \ 
