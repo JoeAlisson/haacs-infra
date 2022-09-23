@@ -1,0 +1,8 @@
+stages:
+  - provisioning
+
+creating-infraestructure-do:
+  stage: provisioning
+  script:
+    - terraform -chdir ./modules/k8s-digital-ocean init -backend-config="conn_str=${TF_PG_CONN}" \ 
+      backend-config="schema_name=infra1"
