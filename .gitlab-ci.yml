@@ -39,6 +39,6 @@ destroy-infraestructure-az:
     - terraform -chdir="./modules/k8s-azure" init  -backend-config="conn_str=${TF_PG_CONN}" -backend-config="schema_name=az_$BACKEND_SCHEMA"
     - terraform -chdir="./modules/k8s-azure" destroy -auto-approve
   rules:
-    - if: $PROVIDER == "digitalocean" && $BACKEND_SCHEMA && $ACTION == "destroy"
+    - if: $PROVIDER == "azure" && $BACKEND_SCHEMA && $ACTION == "destroy"
   retry: 2
 
