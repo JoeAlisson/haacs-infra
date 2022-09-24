@@ -1,3 +1,7 @@
+variables:
+  DIR: ./modules/k8s-digital-ocean
+  CHDIR: -chdir="${DIR}"
+
 stages:
   - provisioning
 
@@ -5,6 +9,7 @@ creating-infraestructure-do:
   image: hashicorp/terraform:1.3.0
   stage: provisioning
   script:
-    - terraform -chdir="./modules/k8s-digital-ocean" init  -backend-config="conn_str=${TF_PG_CONN}" -backend-config="schema_name=infra1"
+    - terraform ${CHDIR} init  -backend-config="conn_str=${TF_PG_CONN}" -backend-config="schema_name=infra1"
+    - terraform ${CHDIR} apply -auto-approve
   rules:
     - when: manual
