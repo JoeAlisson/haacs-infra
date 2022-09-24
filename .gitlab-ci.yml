@@ -18,7 +18,7 @@ destroy-infraestructure-do:
   needs:
     - create-infraestructure-do
   when: delayed
-  start_in: 15 minutes
+  start_in: 5 minutes
   script:
     - terraform -chdir="./modules/k8s-digital-ocean" init  -backend-config="conn_str=${TF_PG_CONN}" -backend-config="schema_name=infra1"
     - terraform -chdir="./modules/k8s-digital-ocean" destroy -auto-approve
