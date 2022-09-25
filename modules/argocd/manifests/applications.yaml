@@ -3,7 +3,7 @@ applications:
     namespace: argocd
     project: apps
     source:
-      repoURL: https://github.com/JoeAlisson/haacs-apps.git
+      repoURL: https://github.com/haa-criticals/apps.git
       targetRevision: main
       path: apps
     destination:
