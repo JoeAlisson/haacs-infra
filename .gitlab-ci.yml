@@ -3,7 +3,7 @@ stages:
   - destroy
 
 create-infraestructure-do:
-  image: hashicorp/terraform:1.3.0
+  image: hashicorp/terraform:1.3.6
   stage: create
   script:
     - terraform -chdir="./modules/k8s-digital-ocean" init  -backend-config="conn_str=${TF_PG_CONN}" -backend-config="schema_name=do_$BACKEND_SCHEMA"
@@ -13,7 +13,7 @@ create-infraestructure-do:
   retry: 2
 
 destroy-infraestructure-do:
-  image: hashicorp/terraform:1.3.0
+  image: hashicorp/terraform:1.3.6
   stage: destroy
   script:
     - terraform -chdir="./modules/k8s-digital-ocean" init  -backend-config="conn_str=${TF_PG_CONN}" -backend-config="schema_name=do_$BACKEND_SCHEMA"
@@ -23,7 +23,7 @@ destroy-infraestructure-do:
   retry: 2
 
 create-infraestructure-az:
-  image: hashicorp/terraform:1.3.0
+  image: hashicorp/terraform:1.3.6
   stage: create
   script:
     - terraform -chdir="./modules/k8s-azure" init  -backend-config="conn_str=${TF_PG_CONN}" -backend-config="schema_name=az_$BACKEND_SCHEMA"
@@ -33,7 +33,7 @@ create-infraestructure-az:
   retry: 2
 
 destroy-infraestructure-az:
-  image: hashicorp/terraform:1.3.0
+  image: hashicorp/terraform:1.3.6
   stage: destroy
   script:
     - terraform -chdir="./modules/k8s-azure" init  -backend-config="conn_str=${TF_PG_CONN}" -backend-config="schema_name=az_$BACKEND_SCHEMA"

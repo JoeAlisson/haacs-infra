@@ -1,7 +1,7 @@
 resource "helm_release" "cert_manager" {
   repository = "https://charts.jetstack.io"
   chart      = "cert-manager"
-  version    = "1.9.1"
+  version    = "1.10.1"
 
   name      = "cert-manager"
   namespace = "kube-system"
