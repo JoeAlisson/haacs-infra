@@ -7,7 +7,7 @@ resource "digitalocean_record" "root" {
   name   = "@"
   type   = "A"
   value  = var.dns_ip
-  ttl    = 1800
+  ttl    = 300
 }
 
 resource "digitalocean_record" "asterisk" {
@@ -15,5 +15,5 @@ resource "digitalocean_record" "asterisk" {
   name   = "*"
   type   = "A"
   value  = var.dns_ip
-  ttl    = 1800
+  ttl    = 300
 }
