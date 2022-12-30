@@ -26,6 +26,7 @@ module "kubernetes" {
   source = "../digital-ocean"
 
   do_token = var.do_token
+  cluster_name = var.cluster_name
 }
 
 module "dns" {

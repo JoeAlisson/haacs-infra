@@ -20,3 +20,9 @@ variable "letsencrypt_email" {
   type        = string
   description = "Email address for Let's Encrypt certificate registration."
 }
+
+variable "cluster_name" {
+  type        = string
+  description = "The name of the Kubernetes Cluster to create."
+  default     = "haacs-k8s"
+}

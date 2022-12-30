@@ -36,3 +36,9 @@ variable "digitalocean_token" {
   description = "This is the Digital Ocean API token used to create the DNS record."
   sensitive   = true
 }
+
+variable "cluster_name" {
+  type        = string
+  description = "The name of the Kubernetes Cluster to create."
+  default     = "haacs-k8s"
+}

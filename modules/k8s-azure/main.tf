@@ -31,6 +31,7 @@ module "kubernetes" {
   client_secret   = var.azure_client_secret
   tenant       = var.azure_tenant
   subscription = var.azure_subscription
+  cluster_name = var.cluster_name
 }
 
 module "dns" {
