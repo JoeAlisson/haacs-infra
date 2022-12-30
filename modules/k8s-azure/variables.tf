@@ -20,6 +20,12 @@ variable "letsencrypt_email" {
   description = "Email address for Let's Encrypt certificate registration."
 }
 
+variable "cert_manager_issuer" {
+  type        = string
+  description = "The cert-manager issuer to use for the argocd server"
+  default = "letsencrypt"
+}
+
 variable "argocd_oauth_key" {
   type        = string
   description = "The client secret for ArgoCD in the oidc server"

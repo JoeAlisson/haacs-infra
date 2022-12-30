@@ -72,6 +72,7 @@ module "argocd" {
 
   oidc_key = var.argocd_oauth_key
   ingress_domain   = var.k8s_ingress_domain
+  cert_manager_issuer = var.cert_manager_issuer
 
   depends_on = [module.cert_manager]
 

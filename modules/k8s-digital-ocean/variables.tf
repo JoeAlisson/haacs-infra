@@ -21,6 +21,12 @@ variable "letsencrypt_email" {
   description = "Email address for Let's Encrypt certificate registration."
 }
 
+variable "cert_manager_issuer" {
+  type        = string
+  description = "The cert-manager issuer to use"
+  default = "letsencrypt"
+}
+
 variable "cluster_name" {
   type        = string
   description = "The name of the Kubernetes Cluster to create."
