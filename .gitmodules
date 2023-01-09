@@ -1,0 +1,3 @@
+[submodule "modules/kubespray"]
+	path = modules/kubespray
+	url = git@github.com:haa-criticals/kubespray.git
