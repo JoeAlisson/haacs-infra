@@ -83,8 +83,8 @@ resource "null_resource" "kubernetes" {
   depends_on = [null_resource.wait-provisioning]
 
   provisioner "local-exec" {
-    command = "docker run --rm -i -v $(pwd)/:/kubespray/inventory/vsphere/ -v ${var.vm_ssh_private_key}:/root/.ssh/ssh_key --network host -e ANSIBLE_HOST_KEY_CHECKING=False joealisson/haacs:kubespray.2.20-terraform ansible-playbook -i /kubespray/inventory/vsphere/${var.inventory_file} /kubespray/cluster.yml -b -v --private-key /root/.ssh/ssh_key"
-    #command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ${var.inventory_file} ../kubespray/cluster.yml -b -v --private-key ${var.vm_ssh_private_key} --user root"
+    #command = "docker run --rm -i -v $(pwd)/:/kubespray/inventory/vsphere/ -v ${var.vm_ssh_private_key}:/root/.ssh/ssh_key --network host -e ANSIBLE_HOST_KEY_CHECKING=False joealisson/haacs:kubespray.2.20-terraform ansible-playbook -i /kubespray/inventory/vsphere/${var.inventory_file} /kubespray/cluster.yml -b -v --private-key /root/.ssh/ssh_key"
+    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ${var.inventory_file} ../kubespray/cluster.yml -b -v --private-key ${var.vm_ssh_private_key}"
   }
 }
 
