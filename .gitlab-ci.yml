@@ -42,3 +42,23 @@ destroy-infraestructure-az:
     - if: $PROVIDER == "azure" && $BACKEND_SCHEMA && $ACTION == "destroy"
   retry: 2
 
+create-infraestructure-vsphere:
+  image: joealisson/haacs:kubespray.2.20-terraform
+  stage: create
+  script:
+    - terraform -chdir="./modules/k8s-vsphere" init  -backend-config="conn_str=${TF_PG_CONN}" -backend-config="schema_name=vsphere_$BACKEND_SCHEMA"
+    - terraform -chdir="./modules/k8s-vsphere" apply -auto-approve
+  rules:
+    - if: $PROVIDER == "vsphere" && $BACKEND_SCHEMA && $ACTION == "create"
+  retry: 2
+
+destroy-infraestructure-vsphere:
+  image: joealisson/haacs:kubespray.2.20-terraform
+  stage: destroy
+  script:
+    - terraform -chdir="./modules/k8s-vsphere" init  -backend-config="conn_str=${TF_PG_CONN}" -backend-config="schema_name=vsphere_$BACKEND_SCHEMA"
+    - terraform -chdir="./modules/k8s-vsphere" destroy -auto-approve
+  rules:
+    - if: $PROVIDER == "vsphere" && $BACKEND_SCHEMA && $ACTION == "destroy"
+  retry: 2
+
