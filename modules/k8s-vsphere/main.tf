@@ -14,6 +14,8 @@ terraform {
       version = "~> 2.8.0"
     }
   }
+
+  backend "pg" {}
 }
 
 provider "digitalocean" {
