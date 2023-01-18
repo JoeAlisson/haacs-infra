@@ -11,7 +11,7 @@ terraform {
     }
   }
 
-  backend "pg" { }
+  backend "pg" {}
 }
 
 provider "helm" {
@@ -22,15 +22,23 @@ provider "helm" {
   }
 }
 
+provider "digitalocean" {
+  token = var.do_token
+}
+
 module "kubernetes" {
   source = "../digital-ocean"
 
-  do_token = var.do_token
+  do_token     = var.do_token
   cluster_name = var.cluster_name
 }
 
 module "dns" {
   source = "../dns"
+
+  providers = {
+    digitalocean = digitalocean
+  }
 
   digitalocean_token = var.do_token
   dns_domain         = var.k8s_ingress_domain
@@ -41,9 +49,10 @@ module "dns" {
 module "ingress_nginx" {
   source = "../ingress-nginx"
 
-  cluster_token                          = module.kubernetes.cluster_token
-  cluster_host                           = module.kubernetes.cluster_endpoint
-  cluster_ca_certificate_b64             = module.kubernetes.cluster_certificate
+  providers = {
+    helm = helm
+  }
+
   provider_loadbalancer_annotation       = "kubernetes\\.digitalocean\\.com/load-balancer-id"
   provider_loadbalancer_annotation_value = module.kubernetes.load_balancer_id
 }
@@ -61,8 +70,8 @@ module "cert_manager" {
 module "argocd" {
   source = "../argocd"
 
-  oidc_key       = var.argocd_oauth_key
-  ingress_domain = var.k8s_ingress_domain
+  oidc_key            = var.argocd_oauth_key
+  ingress_domain      = var.k8s_ingress_domain
   cert_manager_issuer = var.cert_manager_issuer
 
   depends_on = [module.cert_manager]

@@ -1,3 +1,4 @@
+
 resource "helm_release" "argocd" {
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-cd"
@@ -23,6 +24,11 @@ resource "helm_release" "argocd" {
   }
 
   set {
+    name  = "server.certificate.enabled"
+    value = var.enable_certificate
+  }
+
+  set {
     name  = "server.certificate.domain"
     value = "argocd.${var.ingress_domain}"
   }
@@ -36,6 +42,12 @@ resource "helm_release" "argocd" {
     name  = "server.ingress.tls[0].hosts[0]"
     value = "argocd.${var.ingress_domain}"
   }
+
+  set {
+    name = "server.ingress.tls[0].secretName"
+    value = var.tls_secret
+  }
+
 }
 
 resource "helm_release" "argocd_apps" {

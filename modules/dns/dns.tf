@@ -17,3 +17,7 @@ resource "digitalocean_record" "asterisk" {
   value  = var.dns_ip
   ttl    = 300
 }
+
+output "fqdn" {
+  value = digitalocean_record.root.fqdn
+}

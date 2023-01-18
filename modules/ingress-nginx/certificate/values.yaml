@@ -1,0 +1,7 @@
+secret:
+  #  Name of the secret
+  name: tls-cert
+  # TLS certificate
+  cert: ""
+  #  TLS key
+  key: ""

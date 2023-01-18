@@ -1,33 +1,3 @@
-variable "cluster_host" {
-  type        = string
-  description = "The hostname (in form of URI) of the Kubernetes API."
-}
-variable "cluster_token" {
-  type        = string
-  description = "(Optional) The bearer token to use for authentication when accessing the Kubernetes API."
-  sensitive   = true
-  default     = ""
-}
-variable "cluster_ca_certificate_b64" {
-  type        = string
-  description = "PEM-encoded root certificates bundle for TLS authentication."
-  sensitive   = true
-}
-
-variable "client_certificate" {
-  type        = string
-  sensitive   = true
-  description = "(Optional) PEM-encoded client certificate for TLS authentication."
-  default     = ""
-}
-
-variable "client_key" {
-  type        = string
-  description = "(Optional) PEM-encoded client certificate key for TLS authentication. "
-  sensitive   = true
-  default     = ""
-}
-
 variable "provider_loadbalancer_annotation" {
   type        = string
   description = "The annotation key to use for Cloud Provider to bind a load balancer to ingress controller."
@@ -43,5 +13,41 @@ variable "provider_loadbalancer_annotation_value" {
 variable "loadBalancer_ip" {
   type        = string
   description = "The IP address of the load balancer to be used in ingress controller."
+  default     = ""
+}
+
+variable "externalIps" {
+  type        = string
+  description = "The IP addresses of the load balancer to be used in ingress controller."
+  default     = "{}"
+}
+
+variable "default_ssl_certificate" {
+  description = "The default SSL certificate to use for HTTPS."
+  type        = string
+  default     = ""
+}
+
+variable "default_ssl_certificate_namespace" {
+  description = "The namespace of the default SSL certificate to use for HTTPS."
+  type        = string
+  default     = ""
+}
+variable "default_ssl_certificate_cert_b64" {
+  description = "The base64 encoded certificate of the default SSL certificate to use for HTTPS."
+  type        = string
+  default     = ""
+  sensitive   = true
+}
+variable "default_ssl_certificate_key_b64" {
+  description = "The base64 encoded key of the default SSL certificate to use for HTTPS."
+  type        = string
+  default     = ""
+  sensitive   = true
+}
+
+variable "kubeconfig_path" {
+  description = "The path to the kubeconfig file."
+  type        = string
   default     = ""
 }

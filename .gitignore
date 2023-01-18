@@ -30,3 +30,5 @@ override.tf.json
 # example: *tfplan*
 
 /.idea/
+/modules/k8s-vsphere/artifacts/
+/modules/k8s-vsphere/credentials/

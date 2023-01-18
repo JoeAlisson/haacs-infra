@@ -11,7 +11,7 @@ terraform {
     }
   }
 
-  backend "pg" { }
+  backend "pg" {}
 
 }
 
@@ -24,18 +24,26 @@ provider "helm" {
   }
 }
 
+provider "digitalocean" {
+  token = var.digitalocean_token
+}
+
 module "kubernetes" {
   source = "../azure"
 
-  client_id       = var.azure_client_id
-  client_secret   = var.azure_client_secret
-  tenant       = var.azure_tenant
-  subscription = var.azure_subscription
-  cluster_name = var.cluster_name
+  client_id     = var.azure_client_id
+  client_secret = var.azure_client_secret
+  tenant        = var.azure_tenant
+  subscription  = var.azure_subscription
+  cluster_name  = var.cluster_name
 }
 
 module "dns" {
   source = "../dns"
+
+  providers = {
+    digitalocean = digitalocean
+  }
 
   digitalocean_token = var.digitalocean_token
   dns_domain         = var.k8s_ingress_domain
@@ -45,10 +53,9 @@ module "dns" {
 module "ingress_nginx" {
   source = "../ingress-nginx"
 
-  cluster_host               = module.kubernetes.cluster_endpoint
-  cluster_ca_certificate_b64 = module.kubernetes.cluster_certificate
-  client_certificate         = module.kubernetes.client_certificate
-  client_key                 = module.kubernetes.client_key
+  providers = {
+    helm = helm
+  }
 
   loadBalancer_ip                        = module.kubernetes.loadbalancer_ip
   provider_loadbalancer_annotation       = "service\\.beta\\.kubernetes\\.io/azure-load-balancer-resource-group"
@@ -70,8 +77,8 @@ module "cert_manager" {
 module "argocd" {
   source = "../argocd"
 
-  oidc_key = var.argocd_oauth_key
-  ingress_domain   = var.k8s_ingress_domain
+  oidc_key            = var.argocd_oauth_key
+  ingress_domain      = var.k8s_ingress_domain
   cert_manager_issuer = var.cert_manager_issuer
 
   depends_on = [module.cert_manager]
