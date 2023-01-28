@@ -4,6 +4,12 @@ variable "oidc_key" {
   sensitive   = true
 }
 
+variable "oidc_issuer" {
+  description = "The issuer oidc server url"
+  type        = string
+  default     = "https://auth.jfal.jus.br/realms/intranet"
+}
+
 variable "ingress_domain" {
   type        = string
   description = "The root domain for the ingress. This will be used to create the ingress host for the argocd server"

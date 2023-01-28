@@ -1,4 +1,3 @@
-
 resource "helm_release" "argocd" {
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-cd"
@@ -21,6 +20,11 @@ resource "helm_release" "argocd" {
   set_sensitive {
     name  = "configs.secret.extra.oidc\\.keycloak\\.clientSecret"
     value = var.oidc_key
+  }
+
+  set {
+    name  = "configs.secret.extra.oidc\\.keycloak\\.issuer"
+    value = var.oidc_issuer
   }
 
   set {
