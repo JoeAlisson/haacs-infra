@@ -62,4 +62,19 @@ resource "helm_release" "argocd_apps" {
   values = [
     file("${path.module}/manifests/applications.yaml")
   ]
+
+  set {
+    name  = "applications[0].source.repoURL"
+    value = var.apps_repository
+  }
+
+  set {
+    name = "applications[0].source.targetRevision"
+    value = var.apps_repository_targetRevision
+  }
+
+  set {
+    name = "applications[0].source.path"
+    value = var.apps_repository_path
+  }
 }

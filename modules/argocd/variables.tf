@@ -26,3 +26,21 @@ variable "cert_manager_issuer" {
   description = "The cert-manager issuer to use for the argocd server"
   default     = "letsencrypt"
 }
+
+variable "apps_repository" {
+  description = "The repository containing the ArgoCD apps to deploy"
+  type        = string
+  default     = "https://github.com/haa-criticals/apps.git"
+}
+
+variable "apps_repository_targetRevision" {
+  description = "The target revision for the apps repository"
+  type        = string
+  default     = "main"
+}
+
+variable "apps_repository_path" {
+  description = "The path to the apps directory in the apps repository"
+  type        = string
+  default     = "apps"
+}
