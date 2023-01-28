@@ -170,10 +170,34 @@ variable "ingress_default_ssl_cert_key_b64" {
   sensitive   = true
 }
 
+variable "argocd_oidc_issuer" {
+  description = "The ArgoCD OIDC issuer"
+  type        = string
+  default     = "https://auth.jfal.jus.br/realms/intranet"
+}
+
 variable "argocd_oidc_key" {
   description = "The ArgoCD OIDC key"
   type        = string
   default     = ""
+}
+
+variable "argocd_apps_repository" {
+  description = "The repository containing the ArgoCD apps to deploy"
+  type        = string
+  default     = "https://github.com/haa-criticals/apps.git"
+}
+
+variable "argocd_apps_repository_path" {
+  description = "The path to the apps directory in the apps repository"
+  type        = string
+  default     = "apps"
+}
+
+variable "argocd_apps_repository_targetRevision" {
+  description = "The target revision for the apps repository"
+  type        = string
+  default     = "main"
 }
 
 variable "enable_certmanage" {

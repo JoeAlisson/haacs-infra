@@ -156,6 +156,12 @@ module "argocd" {
   depends_on = [module.cert_manager, module.ingress_nginx]
 
   oidc_key           = var.argocd_oidc_key
+  oidc_issuer        = var.argocd_oidc_issuer
   enable_certificate = var.enable_certmanage
   ingress_domain     = var.ingress_domain
+
+  apps_repository = var.argocd_apps_repository
+  apps_repository_path = var.argocd_apps_repository_path
+  apps_repository_targetRevision = var.argocd_apps_repository_targetRevision
+
 }
